@@ -35,6 +35,8 @@ import org.springframework.util.StringValueResolver;
  * {@link org.springframework.beans.factory.support.BeanDefinitionRegistry}
  * implementations.
  *
+ * 别名管理的基本实现 使用一个concurrentHashMap保存注入的别名
+ *
  * @author Juergen Hoeller
  * @since 2.5.2
  */

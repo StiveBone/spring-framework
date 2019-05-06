@@ -20,6 +20,8 @@ package org.springframework.core;
  * Common interface for managing aliases. Serves as super-interface for
  * {@link org.springframework.beans.factory.support.BeanDefinitionRegistry}.
  *
+ * 定义容器基本管理别名方法
+ *
  * @author Juergen Hoeller
  * @since 2.5.2
  */
