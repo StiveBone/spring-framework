@@ -57,6 +57,7 @@ import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.PayloadApplicationEvent;
 import org.springframework.context.ResourceLoaderAware;
+import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader;
 import org.springframework.context.annotation.ConfigurationClassParser;
 import org.springframework.context.annotation.ConfigurationClassPostProcessor;
@@ -533,6 +534,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// Invoke factory processors registered as beans in the context.
 				/**
 				 * 调用BeanFactoryProcessor 初始化@Configuration中定义的BeanDefinition
+				 *
+				 * ConfigurationClassPostProcessor注入如容器是在{@link AnnotatedBeanDefinitionReader#AnnotatedBeanDefinitionReader(org.springframework.beans.factory.support.BeanDefinitionRegistry)}终完成
 				 *
 				 * @see PostProcessorRegistrationDelegate#invokeBeanFactoryPostProcessors(org.springframework.beans.factory.config.ConfigurableListableBeanFactory, java.util.List)
 				 * @see ConfigurationClassPostProcessor#postProcessBeanDefinitionRegistry(org.springframework.beans.factory.support.BeanDefinitionRegistry)
