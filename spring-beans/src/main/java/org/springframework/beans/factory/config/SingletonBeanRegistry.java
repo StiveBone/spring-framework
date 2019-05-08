@@ -26,7 +26,7 @@ import org.springframework.lang.Nullable;
  *
  * <p>The {@link ConfigurableBeanFactory} interface extends this interface.
  *
- * 定义对单例Bean的注册鸡获取方法
+ * 定义对单例Bean的注册获取方法
  *
  * @author Juergen Hoeller
  * @since 2.0

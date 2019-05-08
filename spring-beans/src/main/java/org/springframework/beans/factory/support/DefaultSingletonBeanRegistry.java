@@ -73,24 +73,36 @@ import org.springframework.util.StringUtils;
  */
 public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements SingletonBeanRegistry {
 
+	/*---------------------------三级缓存 start----------------------------*/
 	/**
-	 * 保存单例Bean
+	 * 单例对象Cache
+	 * 一级缓存
 	 */
 	/** Cache of singleton objects: bean name to bean instance. */
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 
 	/**
-	 * 保存beanName
+	 * 单例对象工厂Cache
+	 * 三级缓存
 	 */
 	/** Cache of singleton factories: bean name to ObjectFactory. */
 	private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<>(16);
 
+	/**
+	 * 提前暴露的单例Bean
+	 * 二级缓存
+	 */
 	/** Cache of early singleton objects: bean name to bean instance. */
 	private final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
+
+	/*---------------------------三级缓存 end ----------------------------*/
 
 	/** Set of registered singletons, containing the bean names in registration order. */
 	private final Set<String> registeredSingletons = new LinkedHashSet<>(256);
 
+	/**
+	 * 正在创建的Bean 由于一个Bean的创建可能依赖其他对个Bean则需要先创建完其他的Bean
+	 */
 	/** Names of beans that are currently in creation. */
 	private final Set<String> singletonsCurrentlyInCreation =
 			Collections.newSetFromMap(new ConcurrentHashMap<>(16));
@@ -134,6 +146,8 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	}
 
 	/**
+	 * 添加单例
+	 *
 	 * Add the given singleton object to the singleton cache of this factory.
 	 * <p>To be called for eager registration of singletons.
 	 * @param beanName the name of the bean
@@ -174,6 +188,8 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	}
 
 	/**
+	 * 单例获取
+	 *
 	 * Return the (raw) singleton object registered under the given name.
 	 * <p>Checks already instantiated singletons and also allows for an early
 	 * reference to a currently created singleton (resolving a circular reference).
@@ -183,10 +199,20 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 */
 	@Nullable
 	protected Object getSingleton(String beanName, boolean allowEarlyReference) {
+
+		//1 首先从单例Cache里面直接获取对象
+
 		Object singletonObject = this.singletonObjects.get(beanName);
+
+		//判断对象是否正在创建中  指的是如对象依赖的其他对象则需要先完成其他对象的
+		//的创建此时该Bean处于创建中的状态
 		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
 			synchronized (this.singletonObjects) {
+
+				//2 从二级缓存中获取提前暴露的实例
 				singletonObject = this.earlySingletonObjects.get(beanName);
+
+				//3 如果二级缓存未命中 则从三级缓存中获取获取实例
 				if (singletonObject == null && allowEarlyReference) {
 					ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 					if (singletonFactory != null) {
