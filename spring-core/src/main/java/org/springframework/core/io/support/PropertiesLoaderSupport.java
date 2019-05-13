@@ -31,6 +31,9 @@ import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.PropertiesPersister;
 
 /**
+ *
+ * Properties FactoryBean
+ *
  * Base class for JavaBean-style components that need to load properties
  * from one or more resources. Supports local properties as well, with
  * configurable overriding.
@@ -43,19 +46,27 @@ public abstract class PropertiesLoaderSupport {
 	/** Logger available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
+	//已经加载的Properties 通常是配置一些默认的配置;
 	@Nullable
 	protected Properties[] localProperties;
 
+	//是否用已经加载的Properties覆盖当前重复的值 既是越后加载优先级越高
 	protected boolean localOverride = false;
 
+	/**
+	 * 所有资源
+	 */
 	@Nullable
 	private Resource[] locations;
 
+	//是否忽略找不到的资源
 	private boolean ignoreResourceNotFound = false;
 
+	//文件编码格式如UTF-8
 	@Nullable
 	private String fileEncoding;
 
+	//文件Dao主要完成 文件读写
 	private PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 
 
@@ -146,18 +157,18 @@ public abstract class PropertiesLoaderSupport {
 	protected Properties mergeProperties() throws IOException {
 		Properties result = new Properties();
 
-		if (this.localOverride) {
+		if (this.localOverride) { //如果默认配置优先则先加载指定配置 然后用默认覆盖
 			// Load properties from file upfront, to let local properties override.
 			loadProperties(result);
 		}
 
-		if (this.localProperties != null) {
+		if (this.localProperties != null) { //加载默认配置
 			for (Properties localProp : this.localProperties) {
 				CollectionUtils.mergePropertiesIntoMap(localProp, result);
 			}
 		}
 
-		if (!this.localOverride) {
+		if (!this.localOverride) { //如果指定配置优先则覆盖默认配置
 			// Load properties from file afterwards, to let those properties override.
 			loadProperties(result);
 		}
@@ -166,6 +177,8 @@ public abstract class PropertiesLoaderSupport {
 	}
 
 	/**
+	 * 加载指定配置
+	 *
 	 * Load properties into the given instance.
 	 * @param props the Properties instance to load into
 	 * @throws IOException in case of I/O errors

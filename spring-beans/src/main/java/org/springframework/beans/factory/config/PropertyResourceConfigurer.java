@@ -28,6 +28,10 @@ import org.springframework.core.io.support.PropertiesLoaderSupport;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * Properties资源配置器
+ *
+ * 执行Properties资源替换BeanFactory中存在占位符的Bean的占位符
+ *
  * Allows for configuration of individual bean property values from a property resource,
  * i.e. a properties file. Useful for custom config files targeted at system
  * administrators that override bean properties configured in the application context.
