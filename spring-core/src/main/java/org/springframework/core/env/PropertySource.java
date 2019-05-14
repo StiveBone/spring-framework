@@ -24,6 +24,10 @@ import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * 配置数据源 源可以是Properties Map ServletConfig等等
+ *
+ * 配置数据源通常不单独使用 而是通过PropertySources对象使用与数据源解析器PropertyResolver结合使用，因此可以进行基于优先级的配置搜索
+ *
  * Abstract base class representing a source of name/value property pairs. The underlying
  * {@linkplain #getSource() source object} may be of any type {@code T} that encapsulates
  * properties. Examples include {@link java.util.Properties} objects, {@link java.util.Map}
