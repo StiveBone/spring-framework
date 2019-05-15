@@ -31,6 +31,8 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ * 默认资源加载器
+ *
  * Default implementation of the {@link ResourceLoader} interface.
  * Used by {@link ResourceEditor}, and serves as base class for
  * {@link org.springframework.context.support.AbstractApplicationContext}.
@@ -139,7 +141,12 @@ public class DefaultResourceLoader implements ResourceLoader {
 		this.resourceCaches.clear();
 	}
 
-
+	/**
+	 * 先使用 资源协议解析器尝试解析路径 获取资源 如果获取不到
+	 *
+	 * @param location the resource location
+	 * @return
+	 */
 	@Override
 	public Resource getResource(String location) {
 		Assert.notNull(location, "Location must not be null");

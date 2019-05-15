@@ -27,6 +27,9 @@ import java.nio.channels.ReadableByteChannel;
 import org.springframework.lang.Nullable;
 
 /**
+ * 资源接口 代表一个xml properties等资源文件
+ * Spring在获取Properties等对象时 需要一个Resource对象 从Resource对象中获取键值对
+ *
  * Interface for a resource descriptor that abstracts from the actual
  * type of underlying resource, such as a file or class path resource.
  *
