@@ -20,6 +20,9 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
+ * Properties类型的PropertySource
+ * 只能用于String键值类型的map
+ *
  * {@link PropertySource} implementation that extracts properties from a
  * {@link java.util.Properties} object.
  *

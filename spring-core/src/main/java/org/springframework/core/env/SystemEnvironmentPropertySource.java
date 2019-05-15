@@ -22,6 +22,10 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
+ * SystemEnvironmentPropertySource是一个专门为AbstractEnvironment定制的PropertyResource
+ * 由于shell不允许包含'.'还有连接符弹允许变量大小写 因此该类可以进行点号连接符大小写模糊查找
+ *
+ *
  * Specialization of {@link MapPropertySource} designed for use with
  * {@linkplain AbstractEnvironment#getSystemEnvironment() system environment variables}.
  * Compensates for constraints in Bash and other shells that do not allow for variables

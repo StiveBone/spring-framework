@@ -27,6 +27,10 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**
+ * ResourcePropertySource类主要实现 Resource 与PropertySource的结合， 实现从Resource中加载配置文件
+ *
+ * 只要是通过{@link PropertiesLoaderUtils}从Resource中加载Properties并赋值给PropertySource
+ *
  * Subclass of {@link PropertiesPropertySource} that loads a {@link Properties} object
  * from a given {@link org.springframework.core.io.Resource} or resource location such as
  * {@code "classpath:/com/myco/foo.properties"} or {@code "file:/path/to/file.xml"}.

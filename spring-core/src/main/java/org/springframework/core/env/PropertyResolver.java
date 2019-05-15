@@ -19,7 +19,7 @@ package org.springframework.core.env;
 import org.springframework.lang.Nullable;
 
 /**
- * 数据源解析器
+ * 数据源解析器 主要实现占位符替换 配置获取主要委托给PropertySource实现
  *
  * Interface for resolving properties against any underlying source.
  *

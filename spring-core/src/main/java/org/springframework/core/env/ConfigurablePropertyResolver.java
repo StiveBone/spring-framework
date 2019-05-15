@@ -20,6 +20,12 @@ import org.springframework.core.convert.support.ConfigurableConversionService;
 import org.springframework.lang.Nullable;
 
 /**
+ * 可配置 配置数据源解析器
+ *
+ * 提供数据转换服务
+ *
+ * 以及占位符解析需要的配置数据 {@link org.springframework.util.PropertyPlaceholderHelper}
+ *
  * Configuration interface to be implemented by most if not all {@link PropertyResolver}
  * types. Provides facilities for accessing and customizing the
  * {@link org.springframework.core.convert.ConversionService ConversionService}

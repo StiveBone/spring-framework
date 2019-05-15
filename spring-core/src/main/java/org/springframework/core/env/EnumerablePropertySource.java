@@ -19,6 +19,8 @@ package org.springframework.core.env;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * 可枚举的配置数据源 可以枚举出底层对象的所有key 而不是直接getProperties 提高获取配置的效率
+ *
  * A {@link PropertySource} implementation capable of interrogating its
  * underlying source object to enumerate all possible property name/value
  * pairs. Exposes the {@link #getPropertyNames()} method to allow callers

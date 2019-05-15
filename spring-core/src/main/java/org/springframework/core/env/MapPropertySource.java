@@ -22,6 +22,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**
+ * Map类型PropertySource
+ *
  * {@link PropertySource} that reads keys and values from a {@code Map} object.
  *
  * @author Chris Beams
