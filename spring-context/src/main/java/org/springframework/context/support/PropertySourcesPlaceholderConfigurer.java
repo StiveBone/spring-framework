@@ -36,6 +36,8 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringValueResolver;
 
 /**
+ * 使用PropertySource替换占位符 支持当前配置文件和Environment中取值
+ *
  * Specialization of {@link PlaceholderConfigurerSupport} that resolves ${...} placeholders
  * within bean definition property values and {@code @Value} annotations against the current
  * Spring {@link Environment} and its set of {@link PropertySources}.
