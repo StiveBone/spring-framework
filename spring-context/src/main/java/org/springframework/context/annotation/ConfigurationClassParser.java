@@ -85,6 +85,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 /**
+ * Configuration 类解析
+ *
  * Parses a {@link Configuration} class definition, populating a collection of
  * {@link ConfigurationClass} objects (parsing a single Configuration class may result in
  * any number of ConfigurationClass objects because one Configuration class may import
@@ -217,7 +219,9 @@ class ConfigurationClassParser {
 	}
 
 
+	//处理ConfigurationClass
 	protected void processConfigurationClass(ConfigurationClass configClass) throws IOException {
+		//@Condition条件计算
 		if (this.conditionEvaluator.shouldSkip(configClass.getMetadata(), ConfigurationPhase.PARSE_CONFIGURATION)) {
 			return;
 		}

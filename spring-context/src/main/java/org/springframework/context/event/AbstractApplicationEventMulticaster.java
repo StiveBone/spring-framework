@@ -285,6 +285,8 @@ public abstract class AbstractApplicationEventMulticaster
 	}
 
 	/**
+	 * 通过GenericApplicationListenerAdapter对泛型进行适配
+	 *
 	 * Determine whether the given listener supports the given event.
 	 * <p>The default implementation detects the {@link SmartApplicationListener}
 	 * and {@link GenericApplicationListener} interfaces. In case of a standard

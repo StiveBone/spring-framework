@@ -23,6 +23,9 @@ import org.springframework.beans.PropertyValues;
 import org.springframework.lang.Nullable;
 
 /**
+ * 在Bean实例化之前调用 用于给指定的Bean生成实例 而不是使用Bean内部的方式生成Bean的实例
+ *
+ *
  * Subinterface of {@link BeanPostProcessor} that adds a before-instantiation callback,
  * and a callback after instantiation but before explicit properties are set or
  * autowiring occurs.
@@ -93,6 +96,9 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	}
 
 	/**
+	 * 对PropertyValues做后置处理 如验证是否为空等{@link RequiredAnnotationBeanPostProcessor} 验证reqeuire注解
+	 * {@link AutowiredAnnotationBeanPostProcessor}对@Autowire @Value注解注入属性
+	 *
 	 * Post-process the given property values before the factory applies them
 	 * to the given bean, without any need for property descriptors.
 	 * <p>Implementations should return {@code null} (the default) if they provide a custom
@@ -118,6 +124,8 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	}
 
 	/**
+	 * 对PropertyValues做后置处理 如验证是否为空等{@link RequiredAnnotationBeanPostProcessor} 验证reqeuire注解
+	 *
 	 * Post-process the given property values before the factory applies them
 	 * to the given bean. Allows for checking whether all dependencies have been
 	 * satisfied, for example based on a "Required" annotation on bean property setters.

@@ -32,7 +32,7 @@ import org.springframework.util.PropertiesPersister;
 
 /**
  *
- * Properties FactoryBean
+ * 配置文件加载支持
  *
  * Base class for JavaBean-style components that need to load properties
  * from one or more resources. Supports local properties as well, with

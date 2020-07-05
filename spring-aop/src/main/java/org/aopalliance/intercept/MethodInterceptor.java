@@ -17,6 +17,8 @@
 package org.aopalliance.intercept;
 
 /**
+ * 方法拦截
+ *
  * Intercepts calls on an interface on its way to the target. These
  * are nested "on top" of the target.
  *

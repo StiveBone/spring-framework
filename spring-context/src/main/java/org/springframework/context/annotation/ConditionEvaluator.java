@@ -39,6 +39,10 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.MultiValueMap;
 
 /**
+ * @Conditional  计算
+ * 1、Bean是否加载
+ * 2、ConfigurationClass是否加载
+ *
  * Internal class used to evaluate {@link Conditional} annotations.
  *
  * @author Phillip Webb

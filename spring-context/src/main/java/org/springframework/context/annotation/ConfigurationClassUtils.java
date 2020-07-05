@@ -56,7 +56,7 @@ abstract class ConfigurationClassUtils {
 	public static final String CONFIGURATION_CLASS_LITE = "lite";
 
 	public static final String CONFIGURATION_CLASS_ATTRIBUTE =
-			Conventions.getQualifiedAttributeName(ConfigurationClassPostProcessor.class, "configurationClass");
+			Conventions.getQualifiedAttributeName(ConfigurationClassPostProcessor.class, "configurationClass"); //如果是@configuration类设置设置是full模式还是lite模式
 
 	private static final String ORDER_ATTRIBUTE =
 			Conventions.getQualifiedAttributeName(ConfigurationClassPostProcessor.class, "order");
@@ -75,6 +75,8 @@ abstract class ConfigurationClassUtils {
 
 
 	/**
+	 * 校验这个BeanDefinition是不是有@Configuration注解，并根据 proxyBeanMethods 和 @Component设置full和lite模式
+	 *
 	 * Check whether the given bean definition is a candidate for a configuration class
 	 * (or a nested component class declared within a configuration/component class,
 	 * to be auto-registered as well), and mark it accordingly.

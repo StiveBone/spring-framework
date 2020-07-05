@@ -276,7 +276,7 @@ public abstract class AopUtils {
 	 * This version also takes into account introductions (for IntroductionAwareMethodMatchers).
 	 * @param advisor the advisor to check
 	 * @param targetClass class we're testing
-	 * @param hasIntroductions whether or not the advisor chain for this bean includes
+	 * @param hasIntroductions whether or not the advisor chain for this bean includes 是是引介通知
 	 * any introductions
 	 * @return whether the pointcut can apply on any method
 	 */
@@ -308,6 +308,10 @@ public abstract class AopUtils {
 		}
 		List<Advisor> eligibleAdvisors = new ArrayList<>();
 		for (Advisor candidate : candidateAdvisors) {
+
+			/**
+			 * 首先处理引介增强
+			 */
 			if (candidate instanceof IntroductionAdvisor && canApply(candidate, clazz)) {
 				eligibleAdvisors.add(candidate);
 			}
@@ -318,6 +322,10 @@ public abstract class AopUtils {
 				// already processed
 				continue;
 			}
+
+			/**
+			 * 处理普通通知
+			 */
 			if (canApply(candidate, clazz, hasIntroductions)) {
 				eligibleAdvisors.add(candidate);
 			}

@@ -19,6 +19,9 @@ package org.springframework.context.annotation;
 import org.springframework.beans.factory.config.BeanDefinition;
 
 /**
+ *
+ * 解析BeanDefinition的Scope
+ *
  * Strategy interface for resolving the scope of bean definitions.
  *
  * @author Mark Fisher

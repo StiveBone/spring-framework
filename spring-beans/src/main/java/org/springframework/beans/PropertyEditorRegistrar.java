@@ -17,6 +17,8 @@
 package org.springframework.beans;
 
 /**
+ * 属性编辑器注册管理器 想 beanWrapper中注册属性编辑器
+ *
  * Interface for strategies that register custom
  * {@link java.beans.PropertyEditor property editors} with a
  * {@link org.springframework.beans.PropertyEditorRegistry property editor registry}.

@@ -439,6 +439,8 @@ public @interface Configuration {
 	String value() default "";
 
 	/**
+	 * 是否增强@Bean方法 防止每次都创建
+	 *
 	 * Specify whether {@code @Bean} methods should get proxied in order to enforce
 	 * bean lifecycle behavior, e.g. to return shared singleton bean instances even
 	 * in case of direct {@code @Bean} method calls in user code. This feature

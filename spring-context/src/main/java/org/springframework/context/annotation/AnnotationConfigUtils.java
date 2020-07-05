@@ -148,7 +148,7 @@ public abstract class AnnotationConfigUtils {
 	public static Set<BeanDefinitionHolder> registerAnnotationConfigProcessors(
 			BeanDefinitionRegistry registry, @Nullable Object source) {
 
-		DefaultListableBeanFactory beanFactory = unwrapDefaultListableBeanFactory(registry);
+		DefaultListableBeanFactory beanFactory = unwrapDefaultListableBeanFactory(registry); //获取底层的BeanFactory ApplicationContext IOC的功能主要委托给底层的BeanFactory
 		if (beanFactory != null) {
 			if (!(beanFactory.getDependencyComparator() instanceof AnnotationAwareOrderComparator)) {
 				beanFactory.setDependencyComparator(AnnotationAwareOrderComparator.INSTANCE);

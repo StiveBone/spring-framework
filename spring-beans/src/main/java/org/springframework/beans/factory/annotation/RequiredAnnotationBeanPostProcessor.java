@@ -42,6 +42,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
+ *
+ *
  * {@link org.springframework.beans.factory.config.BeanPostProcessor} implementation
  * that enforces required JavaBean properties to have been configured.
  * Required bean properties are detected through a Java 5 annotation:

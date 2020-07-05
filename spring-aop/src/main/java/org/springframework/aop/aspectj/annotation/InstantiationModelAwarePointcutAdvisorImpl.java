@@ -34,6 +34,8 @@ import org.springframework.aop.support.Pointcuts;
 import org.springframework.lang.Nullable;
 
 /**
+ * 内部通知实现 一个方法一个通知
+ *
  * Internal implementation of AspectJPointcutAdvisor.
  * Note that there will be one instance of this advisor for each target method.
  *
@@ -56,6 +58,9 @@ final class InstantiationModelAwarePointcutAdvisorImpl
 
 	private final Class<?>[] parameterTypes;
 
+	/**
+	 * 目标方法
+	 */
 	private transient Method aspectJAdviceMethod;
 
 	private final AspectJAdvisorFactory aspectJAdvisorFactory;

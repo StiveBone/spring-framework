@@ -45,6 +45,8 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ * 扫描注解 也会激活 {@link ConfigurationClassPostProcessor}
+ *
  * Parser for the {@code <context:component-scan/>} element.
  *
  * @author Mark Fisher

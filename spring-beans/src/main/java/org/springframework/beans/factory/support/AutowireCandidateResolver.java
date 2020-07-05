@@ -21,6 +21,9 @@ import org.springframework.beans.factory.config.DependencyDescriptor;
 import org.springframework.lang.Nullable;
 
 /**
+ *
+ * 处理@Autowaire @Primary @Qualifier @Value @Lazy
+ *
  * Strategy interface for determining whether a specific bean definition
  * qualifies as an autowire candidate for a specific dependency.
  *
@@ -31,6 +34,8 @@ import org.springframework.lang.Nullable;
 public interface AutowireCandidateResolver {
 
 	/**
+	 * 判断给定的bd是否允许被依赖注入 默认是true
+	 *
 	 * Determine whether the given bean definition qualifies as an
 	 * autowire candidate for the given dependency.
 	 * <p>The default implementation checks
@@ -45,6 +50,8 @@ public interface AutowireCandidateResolver {
 	}
 
 	/**
+	 * 给定的descriptor是否是必须的
+	 *
 	 * Determine whether the given descriptor is effectively required.
 	 * <p>The default implementation checks {@link DependencyDescriptor#isRequired()}.
 	 * @param descriptor the descriptor for the target method parameter or field
@@ -58,6 +65,8 @@ public interface AutowireCandidateResolver {
 	}
 
 	/**
+	 * QualifierAnnotationAutowireCandidateResolver对它有实现
+	 *
 	 * Determine whether the given descriptor declares a qualifier beyond the type
 	 * (typically - but not necessarily - a specific kind of annotation).
 	 * <p>The default implementation returns {@code false}.
@@ -72,6 +81,8 @@ public interface AutowireCandidateResolver {
 	}
 
 	/**
+	 * 是否给一个建议值 注入的时候~~~QualifierAnnotationAutowireCandidateResolvert有实现
+	 *
 	 * Determine whether a default value is suggested for the given dependency.
 	 * <p>The default implementation simply returns {@code null}.
 	 * @param descriptor the descriptor for the target method parameter or field
@@ -85,6 +96,8 @@ public interface AutowireCandidateResolver {
 	}
 
 	/**
+	 * 如果注入点injection point需要的话，就创建一个proxy来作为最终的解决方案ContextAnnotationAutowireCandidateResolve
+	 *
 	 * Build a proxy for lazy resolution of the actual dependency target,
 	 * if demanded by the injection point.
 	 * <p>The default implementation simply returns {@code null}.

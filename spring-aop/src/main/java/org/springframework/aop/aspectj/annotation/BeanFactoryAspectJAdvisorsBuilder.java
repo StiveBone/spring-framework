@@ -42,6 +42,9 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 
 	private final ListableBeanFactory beanFactory;
 
+	/**
+	 * AspectJ 相关注解源信息解析
+	 */
 	private final AspectJAdvisorFactory advisorFactory;
 
 	@Nullable
@@ -74,6 +77,8 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 
 
 	/**
+	 * AspectJ增强通知
+	 *
 	 * Look for AspectJ-annotated aspect beans in the current bean factory,
 	 * and return to a list of Spring AOP Advisors representing them.
 	 * <p>Creates a Spring Advisor for each AspectJ advice method.
@@ -101,12 +106,20 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 						if (beanType == null) {
 							continue;
 						}
+
+						/**
+						 * 存在AspectJ注解
+						 */
 						if (this.advisorFactory.isAspect(beanType)) {
 							aspectNames.add(beanName);
 							AspectMetadata amd = new AspectMetadata(beanType, beanName);
 							if (amd.getAjType().getPerClause().getKind() == PerClauseKind.SINGLETON) {
 								MetadataAwareAspectInstanceFactory factory =
 										new BeanFactoryAspectInstanceFactory(this.beanFactory, beanName);
+
+								/**
+								 * 获取增强方法
+								 */
 								List<Advisor> classAdvisors = this.advisorFactory.getAdvisors(factory);
 								if (this.beanFactory.isSingleton(beanName)) {
 									this.advisorsCache.put(beanName, classAdvisors);
@@ -125,6 +138,10 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 								MetadataAwareAspectInstanceFactory factory =
 										new PrototypeAspectInstanceFactory(this.beanFactory, beanName);
 								this.aspectFactoryCache.put(beanName, factory);
+
+								/**
+								 * 获取增强方法
+								 */
 								advisors.addAll(this.advisorFactory.getAdvisors(factory));
 							}
 						}

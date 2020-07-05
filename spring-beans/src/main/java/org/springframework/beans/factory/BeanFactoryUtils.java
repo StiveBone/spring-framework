@@ -72,6 +72,8 @@ public abstract class BeanFactoryUtils {
 	}
 
 	/**
+	 * 转换FactoryBean名称 如果是FactoryBean 去掉&  否则返回本身
+	 *
 	 * Return the actual bean name, stripping out the factory dereference
 	 * prefix (if any, also stripping repeated factory prefixes if found).
 	 * @param name the name of the bean
