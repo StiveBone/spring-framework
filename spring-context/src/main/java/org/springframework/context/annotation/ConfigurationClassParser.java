@@ -128,6 +128,9 @@ class ConfigurationClassParser {
 
 	private final BeanDefinitionRegistry registry;
 
+	/**
+	 * @componentscan解析
+	 */
 	private final ComponentScanAnnotationParser componentScanParser;
 
 	private final ConditionEvaluator conditionEvaluator;
@@ -164,6 +167,11 @@ class ConfigurationClassParser {
 	}
 
 
+	/**
+	 * 解析所有的配置类
+	 *
+	 * @param configCandidates
+	 */
 	public void parse(Set<BeanDefinitionHolder> configCandidates) {
 		for (BeanDefinitionHolder holder : configCandidates) {
 			BeanDefinition bd = holder.getBeanDefinition();
@@ -219,9 +227,14 @@ class ConfigurationClassParser {
 	}
 
 
-	//处理ConfigurationClass
+	/**
+	 * 处理ConfigurationClass
+	 */
 	protected void processConfigurationClass(ConfigurationClass configClass) throws IOException {
-		//@Condition条件计算
+
+		/**
+		 * 计算Condition是否满足
+		 */
 		if (this.conditionEvaluator.shouldSkip(configClass.getMetadata(), ConfigurationPhase.PARSE_CONFIGURATION)) {
 			return;
 		}

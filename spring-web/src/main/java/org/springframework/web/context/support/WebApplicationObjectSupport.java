@@ -28,6 +28,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.WebUtils;
 
 /**
+ * Web容器环境的支持类用于获取ServletContext
+ *
  * Convenient superclass for application objects running in a {@link WebApplicationContext}.
  * Provides {@code getWebApplicationContext()}, {@code getServletContext()}, and
  * {@code getTempDir()} accessors.

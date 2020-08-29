@@ -32,6 +32,8 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 /**
+ * 自定义Spring MVC
+ *
  * Defines callback methods to customize the Java-based configuration for
  * Spring MVC enabled via {@code @EnableWebMvc}.
  *

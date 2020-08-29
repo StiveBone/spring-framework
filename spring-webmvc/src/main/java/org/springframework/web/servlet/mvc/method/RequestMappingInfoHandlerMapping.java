@@ -47,6 +47,8 @@ import org.springframework.web.servlet.mvc.condition.NameValueExpression;
 import org.springframework.web.util.WebUtils;
 
 /**
+ * RequestMappingInfo 信息类
+ *
  * Abstract base class for classes for which {@link RequestMappingInfo} defines
  * the mapping between a request and a handler method.
  *
@@ -102,6 +104,8 @@ public abstract class RequestMappingInfoHandlerMapping extends AbstractHandlerMe
 	}
 
 	/**
+	 * 匹配之后的处理
+	 *
 	 * Expose URI template variables, matrix variables, and producible media types in the request.
 	 * @see HandlerMapping#URI_TEMPLATE_VARIABLES_ATTRIBUTE
 	 * @see HandlerMapping#MATRIX_VARIABLES_ATTRIBUTE
@@ -121,6 +125,10 @@ public abstract class RequestMappingInfoHandlerMapping extends AbstractHandlerMe
 		}
 		else {
 			bestPattern = patterns.iterator().next();
+
+			/**
+			 * 提取pathValue
+			 */
 			uriVariables = getPathMatcher().extractUriTemplateVariables(bestPattern, lookupPath);
 		}
 
@@ -131,10 +139,17 @@ public abstract class RequestMappingInfoHandlerMapping extends AbstractHandlerMe
 			request.setAttribute(HandlerMapping.MATRIX_VARIABLES_ATTRIBUTE, matrixVars);
 		}
 
+		/**
+		 * 提取request上的参数
+		 */
 		Map<String, String> decodedUriVariables = getUrlPathHelper().decodePathVariables(request, uriVariables);
 		request.setAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, decodedUriVariables);
 
 		if (!info.getProducesCondition().getProducibleMediaTypes().isEmpty()) {
+
+			/**
+			 * MedidType
+			 */
 			Set<MediaType> mediaTypes = info.getProducesCondition().getProducibleMediaTypes();
 			request.setAttribute(PRODUCIBLE_MEDIA_TYPES_ATTRIBUTE, mediaTypes);
 		}
@@ -144,6 +159,14 @@ public abstract class RequestMappingInfoHandlerMapping extends AbstractHandlerMe
 		return !getUrlPathHelper().shouldRemoveSemicolonContent();
 	}
 
+	/**
+	 *
+	 * 提取request中的参数
+	 *
+	 * @param request
+	 * @param uriVariables
+	 * @return
+	 */
 	private Map<String, MultiValueMap<String, String>> extractMatrixVariables(
 			HttpServletRequest request, Map<String, String> uriVariables) {
 

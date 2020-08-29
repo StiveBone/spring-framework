@@ -24,6 +24,8 @@ import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.context.request.NativeWebRequest;
 
 /**
+ * 解析请求的媒体类型
+ *
  * A strategy for resolving the requested media types for a request.
  *
  * @author Rossen Stoyanchev

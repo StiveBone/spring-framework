@@ -32,6 +32,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
 /**
+ * SessionAttributes处理器
+ *
  * Manages controller-specific session attributes declared via
  * {@link SessionAttributes @SessionAttributes}. Actual storage is
  * delegated to a {@link SessionAttributeStore} instance.

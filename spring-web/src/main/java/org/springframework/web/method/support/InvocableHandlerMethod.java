@@ -46,9 +46,15 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	private static final Object[] EMPTY_ARGS = new Object[0];
 
 
+	/**
+	 * 数据绑定
+	 */
 	@Nullable
 	private WebDataBinderFactory dataBinderFactory;
 
+	/**
+	 * 方法参数解析器
+	 */
 	private HandlerMethodArgumentResolverComposite resolvers = new HandlerMethodArgumentResolverComposite();
 
 	private ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();

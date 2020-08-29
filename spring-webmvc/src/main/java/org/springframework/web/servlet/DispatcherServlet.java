@@ -310,6 +310,10 @@ public class DispatcherServlet extends FrameworkServlet {
 	/** Perform cleanup of request attributes after include request?. */
 	private boolean cleanupAfterInclude = true;
 
+
+	/**
+	 * 文件解析器
+	 */
 	/** MultipartResolver used by this servlet. */
 	@Nullable
 	private MultipartResolver multipartResolver;
@@ -322,14 +326,23 @@ public class DispatcherServlet extends FrameworkServlet {
 	@Nullable
 	private ThemeResolver themeResolver;
 
+	/**
+	 * headler映射器
+	 */
 	/** List of HandlerMappings used by this servlet. */
 	@Nullable
 	private List<HandlerMapping> handlerMappings;
 
+	/**
+	 * handlerAdapter
+	 */
 	/** List of HandlerAdapters used by this servlet. */
 	@Nullable
 	private List<HandlerAdapter> handlerAdapters;
 
+	/**
+	 * 异常处理器
+	 */
 	/** List of HandlerExceptionResolvers used by this servlet. */
 	@Nullable
 	private List<HandlerExceptionResolver> handlerExceptionResolvers;
@@ -342,6 +355,9 @@ public class DispatcherServlet extends FrameworkServlet {
 	@Nullable
 	private FlashMapManager flashMapManager;
 
+	/**
+	 * 视图解析器
+	 */
 	/** List of ViewResolvers used by this servlet. */
 	@Nullable
 	private List<ViewResolver> viewResolvers;
@@ -1013,10 +1029,17 @@ public class DispatcherServlet extends FrameworkServlet {
 				// Determine handler for the current request.
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null) {
+
+					/**
+					 * 没有Handler
+					 */
 					noHandlerFound(processedRequest, response);
 					return;
 				}
 
+				/**
+				 * 获取Handler
+				 */
 				// Determine handler adapter for the current request.
 				HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
 

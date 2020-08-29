@@ -92,6 +92,8 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 
 
 	/**
+	 * 调用handler
+	 *
 	 * Invoke the method and handle the return value through one of the
 	 * configured {@link HandlerMethodReturnValueHandler HandlerMethodReturnValueHandlers}.
 	 * @param webRequest the current request

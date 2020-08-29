@@ -45,6 +45,8 @@ public final class MethodIntrospector {
 
 
 	/**
+	 * 反射指定的方法
+	 *
 	 * Select methods on the given target type based on the lookup of associated metadata.
 	 * <p>Callers define methods of interest through the {@link MetadataLookup} parameter,
 	 * allowing to collect the associated metadata into the result map.

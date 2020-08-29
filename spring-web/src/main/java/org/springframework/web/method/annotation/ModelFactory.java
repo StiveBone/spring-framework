@@ -90,6 +90,8 @@ public final class ModelFactory {
 
 
 	/**
+	 * 初始化 modelmap
+	 *
 	 * Populate the model in the following order:
 	 * <ol>
 	 * <li>Retrieve "known" session attributes listed as {@code @SessionAttributes}.

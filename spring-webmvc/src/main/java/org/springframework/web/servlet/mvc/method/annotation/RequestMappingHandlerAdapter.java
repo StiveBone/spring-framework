@@ -98,6 +98,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.util.WebUtils;
 
 /**
+ * RequestMappingHandlerMapping
+ *
  * Extension of {@link AbstractHandlerMethodAdapter} that supports
  * {@link RequestMapping @RequestMapping} annotated {@link HandlerMethod HandlerMethods}.
  *
@@ -185,8 +187,14 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 
 	private final Map<Class<?>, Set<Method>> initBinderCache = new ConcurrentHashMap<>(64);
 
+	/**
+	 * ControllerAdvice
+	 */
 	private final Map<ControllerAdviceBean, Set<Method>> initBinderAdviceCache = new LinkedHashMap<>();
 
+	/**
+	 * 缓存class和handler方法
+	 */
 	private final Map<Class<?>, Set<Method>> modelAttributeCache = new ConcurrentHashMap<>(64);
 
 	private final Map<ControllerAdviceBean, Set<Method>> modelAttributeAdviceCache = new LinkedHashMap<>();
@@ -771,6 +779,16 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 		return true;
 	}
 
+	/**
+	 * 调用handler
+	 *
+	 * @param request current HTTP request
+	 * @param response current HTTP response
+	 * @param handlerMethod handler method to use. This object must have previously been passed to the
+	 * {@link #supportsInternal(HandlerMethod)} this interface, which must have returned {@code true}.
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	protected ModelAndView handleInternal(HttpServletRequest request,
 			HttpServletResponse response, HandlerMethod handlerMethod) throws Exception {
@@ -840,6 +858,8 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 	}
 
 	/**
+	 * 调用handler
+	 *
 	 * Invoke the {@link RequestMapping} handler method preparing a {@link ModelAndView}
 	 * if view resolution is required.
 	 * @since 4.2
@@ -854,17 +874,43 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			WebDataBinderFactory binderFactory = getDataBinderFactory(handlerMethod);
 			ModelFactory modelFactory = getModelFactory(handlerMethod, binderFactory);
 
+			/**
+			 * 包装底层handler 封装了类型转换和数据帮绑定服务
+			 */
 			ServletInvocableHandlerMethod invocableMethod = createInvocableHandlerMethod(handlerMethod);
+
+			/**
+			 * 入参解析器
+			 */
 			if (this.argumentResolvers != null) {
 				invocableMethod.setHandlerMethodArgumentResolvers(this.argumentResolvers);
 			}
+
+			/**
+			 * 响应参数解析器
+			 */
 			if (this.returnValueHandlers != null) {
 				invocableMethod.setHandlerMethodReturnValueHandlers(this.returnValueHandlers);
 			}
+
+			/**
+			 * 数据绑定服务
+			 */
 			invocableMethod.setDataBinderFactory(binderFactory);
+
+			/**
+			 * 参数名称解析器
+			 */
 			invocableMethod.setParameterNameDiscoverer(this.parameterNameDiscoverer);
 
+			/**
+			 * 响应结果容器
+			 */
 			ModelAndViewContainer mavContainer = new ModelAndViewContainer();
+
+			/**
+			 * 设置flashMap
+			 */
 			mavContainer.addAllAttributes(RequestContextUtils.getInputFlashMap(request));
 			modelFactory.initModel(webRequest, mavContainer, invocableMethod);
 			mavContainer.setIgnoreDefaultModelOnRedirect(this.ignoreDefaultModelOnRedirect);
@@ -936,6 +982,14 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 		return new ModelFactory(attrMethods, binderFactory, sessionAttrHandler);
 	}
 
+	/**
+	 * 参数解析
+	 *
+	 * @param factory
+	 * @param bean
+	 * @param method
+	 * @return
+	 */
 	private InvocableHandlerMethod createModelAttributeMethod(WebDataBinderFactory factory, Object bean, Method method) {
 		InvocableHandlerMethod attrMethod = new InvocableHandlerMethod(bean, method);
 		if (this.argumentResolvers != null) {
@@ -946,6 +1000,13 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 		return attrMethod;
 	}
 
+	/**
+	 * 查找 @InitBind方法
+	 *
+	 * @param handlerMethod
+	 * @return
+	 * @throws Exception
+	 */
 	private WebDataBinderFactory getDataBinderFactory(HandlerMethod handlerMethod) throws Exception {
 		Class<?> handlerType = handlerMethod.getBeanType();
 		Set<Method> methods = this.initBinderCache.get(handlerType);

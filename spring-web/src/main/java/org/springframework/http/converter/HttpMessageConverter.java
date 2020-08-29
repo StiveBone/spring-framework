@@ -25,6 +25,11 @@ import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 
 /**
+ * 数据类型转换
+ *
+ * 如果Http body->JSON
+ * JSON-http body
+ *
  * Strategy interface that specifies a converter that can convert from and to HTTP requests and responses.
  *
  * @author Arjen Poutsma

@@ -53,6 +53,12 @@ import org.springframework.web.reactive.result.method.SyncHandlerMethodArgumentR
 import org.springframework.web.reactive.result.method.SyncInvocableHandlerMethod;
 
 /**
+ * 解析注解：
+ * 		InitBinder
+ * 		ModelAttribute
+ * 		RequestMapping
+ * 		ExceptionHandler
+ *
  * Package-private class to assist {@link RequestMappingHandlerAdapter} with
  * resolving, initializing, and caching annotated methods declared in
  * {@code @Controller} and {@code @ControllerAdvice} components. Assists with
@@ -127,6 +133,9 @@ class ControllerMethodResolver {
 		this.exceptionHandlerResolvers = exceptionHandlerResolvers(customResolvers, reactiveRegistry, context);
 		this.reactiveAdapterRegistry = reactiveRegistry;
 
+		/**
+		 * 解析@ControllerAdvice
+		 */
 		initControllerAdviceCaches(context);
 	}
 
@@ -235,6 +244,10 @@ class ControllerMethodResolver {
 				if (!binderMethods.isEmpty()) {
 					this.initBinderAdviceCache.put(bean, binderMethods);
 				}
+
+				/**
+				 * 解析被@ExceptionHandler注解的方法
+				 */
 				ExceptionHandlerMethodResolver resolver = new ExceptionHandlerMethodResolver(beanType);
 				if (resolver.hasExceptionMappings()) {
 					this.exceptionHandlerAdviceCache.put(bean, resolver);

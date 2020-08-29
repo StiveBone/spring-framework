@@ -288,6 +288,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
 			/**
 			 * 只有单例模式才会尝试解决循环依赖，原型模式则会报错
+			 *
+			 * 自己引用自己
 			 */
 			// Fail if we're already creating this bean instance:
 			// We're assumably within a circular reference.

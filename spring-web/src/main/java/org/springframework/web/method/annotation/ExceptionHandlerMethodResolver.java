@@ -33,6 +33,8 @@ import org.springframework.util.ReflectionUtils.MethodFilter;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
+ * 查找ExceptionHadnler类
+ *
  * Discovers {@linkplain ExceptionHandler @ExceptionHandler} methods in a given class,
  * including all of its superclasses, and helps to resolve a given {@link Exception}
  * to the exception types supported by a given {@link Method}.

@@ -101,6 +101,10 @@ import org.springframework.web.servlet.view.ViewResolverComposite;
 import org.springframework.web.util.UrlPathHelper;
 
 /**
+ * Spring MVC java配置的支持类
+ *
+ * 注册必要的Spring MVC组件到IOC容器 并且 通过 WebMvcConfigurer 个性化修改各个组件
+ *
  * This is the main class providing the configuration behind the MVC Java config.
  * It is typically imported by adding {@link EnableWebMvc @EnableWebMvc} to an
  * application {@link Configuration @Configuration} class. An alternative more
@@ -204,30 +208,57 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 
+	/**
+	 * IOC上下文
+	 */
 	@Nullable
 	private ApplicationContext applicationContext;
 
+	/**
+	 * web应用上下文
+	 */
 	@Nullable
 	private ServletContext servletContext;
 
+	/**
+	 * 拦截器
+	 */
 	@Nullable
 	private List<Object> interceptors;
 
+	/**
+	 * url匹配配置
+	 */
 	@Nullable
 	private PathMatchConfigurer pathMatchConfigurer;
 
+	/**
+	 * MediaType解析
+	 */
 	@Nullable
 	private ContentNegotiationManager contentNegotiationManager;
 
+	/**
+	 * handler方法参数解析器
+	 */
 	@Nullable
 	private List<HandlerMethodArgumentResolver> argumentResolvers;
 
+	/**
+	 * handler返回值处理器
+	 */
 	@Nullable
 	private List<HandlerMethodReturnValueHandler> returnValueHandlers;
 
+	/**
+	 * http消息解析
+	 */
 	@Nullable
 	private List<HttpMessageConverter<?>> messageConverters;
 
+	/**
+	 * 跨域配置
+	 */
 	@Nullable
 	private Map<String, CorsConfiguration> corsConfigurations;
 
@@ -269,6 +300,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 
 
 	/**
+	 * 请求映射器
+	 *
 	 * Return a {@link RequestMappingHandlerMapping} ordered at 0 for mapping
 	 * requests to annotated controllers.
 	 */
@@ -350,6 +383,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * url匹配配置
+	 *
 	 * Callback for building the {@link PathMatchConfigurer}.
 	 * Delegates to {@link #configurePathMatch}.
 	 * @since 4.1
@@ -472,6 +507,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * BeanNameHandlerMapping
+	 *
 	 * Return a {@link BeanNameUrlHandlerMapping} ordered at 2 to map URL
 	 * paths to controller bean names.
 	 */
@@ -486,6 +523,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * Web Flux Routing Mapping
+	 *
 	 * Return a {@link RouterFunctionMapping} ordered at 3 to map
 	 * {@linkplain org.springframework.web.servlet.function.RouterFunction router functions}.
 	 * Consider overriding one of these other more fine-grained methods:
@@ -508,6 +547,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * resources Handler
+	 *
 	 * Return a handler mapping ordered at Integer.MAX_VALUE-1 with mapped
 	 * resource handlers. To configure resource handling, override
 	 * {@link #addResourceHandlers}.
@@ -563,6 +604,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * servletHandlerMapping
+	 *
 	 * Return a handler mapping ordered at Integer.MAX_VALUE with a mapped
 	 * default servlet handler. To configure "default" Servlet handling,
 	 * override {@link #configureDefaultServletHandling}.
@@ -584,6 +627,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * handlerMapping Adapter
+	 *
 	 * Returns a {@link RequestMappingHandlerAdapter} for processing requests
 	 * through annotated controller methods. Consider overriding one of these
 	 * other more fine-grained methods:
@@ -634,6 +679,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * web Flux adapter
+	 *
 	 * Returns a {@link HandlerFunctionAdapter} for processing requests through
 	 * {@linkplain org.springframework.web.servlet.function.HandlerFunction handler functions}.
 	 * @since 5.2
@@ -676,6 +723,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * 格式转换
+	 *
 	 * Return a {@link FormattingConversionService} for use with annotated controllers.
 	 * <p>See {@link #addFormatters} as an alternative to overriding this method.
 	 */
@@ -695,6 +744,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * 参数验证
+	 *
 	 * Return a global {@link Validator} instance for example for validating
 	 * {@code @ModelAttribute} and {@code @RequestBody} method arguments.
 	 * Delegates to {@link #getValidator()} first and if that returns {@code null}
@@ -906,6 +957,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * HttpRequestHandlerAdapter
+	 *
 	 * Returns a {@link HttpRequestHandlerAdapter} for processing requests
 	 * with {@link HttpRequestHandler HttpRequestHandlers}.
 	 */
@@ -915,6 +968,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * SimpleControllerHandlerAdapter
+	 *
 	 * Returns a {@link SimpleControllerHandlerAdapter} for processing requests
 	 * with interface-based controllers.
 	 */
@@ -924,6 +979,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * 异常处理器
+	 *
 	 * Returns a {@link HandlerExceptionResolverComposite} containing a list of exception
 	 * resolvers obtained either through {@link #configureHandlerExceptionResolvers} or
 	 * through {@link #addDefaultHandlerExceptionResolvers}.
@@ -1005,6 +1062,8 @@ public class WebMvcConfigurationSupport implements ApplicationContextAware, Serv
 	}
 
 	/**
+	 * 异常解析
+	 *
 	 * Protected method for plugging in a custom subclass of
 	 * {@link ExceptionHandlerExceptionResolver}.
 	 * @since 4.3

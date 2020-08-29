@@ -48,6 +48,8 @@ import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.util.UrlPathHelper;
 
 /**
+ * HandlerMapping 模版类
+ *
  * Abstract base class for {@link org.springframework.web.servlet.HandlerMapping}
  * implementations. Supports ordering, a default handler, handler interceptors,
  * including handler interceptors mapped by path patterns.
@@ -70,24 +72,45 @@ import org.springframework.web.util.UrlPathHelper;
 public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 		implements HandlerMapping, Ordered, BeanNameAware {
 
+	/**
+	 * 默认handler
+	 */
 	@Nullable
 	private Object defaultHandler;
 
+	/**
+	 * 获取http请求的路径
+	 */
 	private UrlPathHelper urlPathHelper = new UrlPathHelper();
 
+	/**
+	 * ant URL匹配
+	 */
 	private PathMatcher pathMatcher = new AntPathMatcher();
 
+	/**
+	 * 拦截器
+	 */
 	private final List<Object> interceptors = new ArrayList<>();
 
 	private final List<HandlerInterceptor> adaptedInterceptors = new ArrayList<>();
 
+	/**
+	 * 跨域配置
+	 */
 	@Nullable
 	private CorsConfigurationSource corsConfigurationSource;
 
+	/**
+	 * 跨域处理器
+	 */
 	private CorsProcessor corsProcessor = new DefaultCorsProcessor();
 
 	private int order = Ordered.LOWEST_PRECEDENCE;  // default: same as non-Ordered
 
+	/**
+	 * beanName
+	 */
 	@Nullable
 	private String beanName;
 
@@ -380,6 +403,8 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 
 
 	/**
+	 * 获取Handler
+	 *
 	 * Look up a handler for the given request, falling back to the default
 	 * handler if no specific one is found.
 	 * @param request current HTTP request
@@ -389,6 +414,10 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	@Override
 	@Nullable
 	public final HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+
+		/**
+		 * handler
+		 */
 		Object handler = getHandlerInternal(request);
 		if (handler == null) {
 			handler = getDefaultHandler();
@@ -402,6 +431,9 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 			handler = obtainApplicationContext().getBean(handlerName);
 		}
 
+		/**
+		 * 设置Chain
+		 */
 		HandlerExecutionChain executionChain = getHandlerExecutionChain(handler, request);
 
 		if (logger.isTraceEnabled()) {

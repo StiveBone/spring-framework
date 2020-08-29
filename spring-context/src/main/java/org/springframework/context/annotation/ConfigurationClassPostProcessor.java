@@ -227,6 +227,8 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 
 	/**
+	 * 处理 BeanFactory 解析Configuration类，生成BeanDefinition到BeanFactory
+	 *
 	 * Derive further bean definitions from the configuration classes in the registry.
 	 */
 	@Override
@@ -272,6 +274,10 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	 * {@link Configuration} classes.
 	 */
 	public void processConfigBeanDefinitions(BeanDefinitionRegistry registry) {
+
+		/**
+		 * @Configuration 注解的类
+		 */
 		List<BeanDefinitionHolder> configCandidates = new ArrayList<>(); //所有可以导入BeanDefinition的类
 		String[] candidateNames = registry.getBeanDefinitionNames();
 
@@ -318,11 +324,20 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		}
 
 		// Parse each @Configuration class
+		/**
+		 * 创建@Configuration解析类
+		 */
 		ConfigurationClassParser parser = new ConfigurationClassParser(
 				this.metadataReaderFactory, this.problemReporter, this.environment,
 				this.resourceLoader, this.componentScanBeanNameGenerator, registry);
 
+		/**
+		 * 对所有的配置类去重
+		 */
 		Set<BeanDefinitionHolder> candidates = new LinkedHashSet<>(configCandidates);
+		/**
+		 * 解析过的集合
+		 */
 		Set<ConfigurationClass> alreadyParsed = new HashSet<>(configCandidates.size());
 		do {
 			parser.parse(candidates);

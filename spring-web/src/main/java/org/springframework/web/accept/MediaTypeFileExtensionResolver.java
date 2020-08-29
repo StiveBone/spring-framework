@@ -21,6 +21,8 @@ import java.util.List;
 import org.springframework.http.MediaType;
 
 /**
+ * 将媒体类型转换到相应的类型
+ *
  * Strategy to resolve {@link MediaType} to a list of file extensions.
  * For example resolve "application/json" to "json".
  *

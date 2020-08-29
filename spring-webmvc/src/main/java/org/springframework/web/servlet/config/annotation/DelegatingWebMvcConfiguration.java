@@ -42,9 +42,15 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 @Configuration
 public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
 
+
 	private final WebMvcConfigurerComposite configurers = new WebMvcConfigurerComposite();
 
 
+	/**
+	 * 查找所有的 WebMvcConfigurer
+	 *
+	 * @param configurers configurers
+	 */
 	@Autowired(required = false)
 	public void setConfigurers(List<WebMvcConfigurer> configurers) {
 		if (!CollectionUtils.isEmpty(configurers)) {

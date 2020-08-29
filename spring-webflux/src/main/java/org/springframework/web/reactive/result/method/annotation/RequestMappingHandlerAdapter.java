@@ -59,9 +59,15 @@ public class RequestMappingHandlerAdapter implements HandlerAdapter, Application
 
 	private List<HttpMessageReader<?>> messageReaders = Collections.emptyList();
 
+	/**
+	 * 参数绑定
+	 */
 	@Nullable
 	private WebBindingInitializer webBindingInitializer;
 
+	/**
+	 * 参数解析配置
+	 */
 	@Nullable
 	private ArgumentResolverConfigurer argumentResolverConfigurer;
 

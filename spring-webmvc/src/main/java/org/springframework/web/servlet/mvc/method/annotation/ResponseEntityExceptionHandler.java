@@ -53,6 +53,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.util.WebUtils;
 
 /**
+ * ControllerAdvice 异常处理的方便类
+ *
  * A convenient base class for {@link ControllerAdvice @ControllerAdvice} classes
  * that wish to provide centralized exception handling across all
  * {@code @RequestMapping} methods through {@code @ExceptionHandler} methods.

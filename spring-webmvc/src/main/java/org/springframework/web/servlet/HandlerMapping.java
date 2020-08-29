@@ -21,6 +21,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.lang.Nullable;
 
 /**
+ * 对http请求和handle之间定义映射关系
+ * 默认使用BeanNameUrlHandlerMapping和RequestMappingHandlerMapping
+ *
+ * HandlerMapping可以设置拦截器但不是非必须的，请求的处理器handler通常会用一个HandlerExecutionChain返回包含了HandlerInterceptor
+ * 在执行Handler之前先执行HandlerInterceptor的preHandler方法 如果返回true则继续执行Handler
+ *
  * Interface to be implemented by objects that define a mapping between
  * requests and handler objects.
  *
@@ -56,6 +62,8 @@ import org.springframework.lang.Nullable;
 public interface HandlerMapping {
 
 	/**
+	 * HttpServletRequest属性用于标识当前的http请求处理器
+	 *
 	 * Name of the {@link HttpServletRequest} attribute that contains the mapped
 	 * handler for the best matching pattern.
 	 * @since 4.3.21
@@ -63,6 +71,8 @@ public interface HandlerMapping {
 	String BEST_MATCHING_HANDLER_ATTRIBUTE = HandlerMapping.class.getName() + ".bestMatchingHandler";
 
 	/**
+	 * HttpServletRequest 属性用于标识查找handler的路径 通过UrlPathHelper返回
+	 *
 	 * Name of the {@link HttpServletRequest} attribute that contains the path
 	 * used to look up the matching handler, which depending on the configured
 	 * {@link org.springframework.web.util.UrlPathHelper} could be the full path
@@ -72,6 +82,8 @@ public interface HandlerMapping {
 	String LOOKUP_PATH = HandlerMapping.class.getName() + ".lookupPath";
 
 	/**
+	 * HttpServletRequest 属性 如果是模式匹配则包含handler路径
+	 *
 	 * Name of the {@link HttpServletRequest} attribute that contains the path
 	 * within the handler mapping, in case of a pattern match, or the full
 	 * relevant URI (typically within the DispatcherServlet's mapping) else.
@@ -83,6 +95,8 @@ public interface HandlerMapping {
 	String PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE = HandlerMapping.class.getName() + ".pathWithinHandlerMapping";
 
 	/**
+	 * HttpServletRequest 属性
+	 *
 	 * Name of the {@link HttpServletRequest} attribute that contains the
 	 * best matching pattern within the handler mapping.
 	 * <p>Note: This attribute is not required to be supported by all
@@ -111,6 +125,8 @@ public interface HandlerMapping {
 	String URI_TEMPLATE_VARIABLES_ATTRIBUTE = HandlerMapping.class.getName() + ".uriTemplateVariables";
 
 	/**
+	 * 参数列表
+	 *
 	 * Name of the {@link HttpServletRequest} attribute that contains a map with
 	 * URI variable names and a corresponding MultiValueMap of URI matrix
 	 * variables for each.

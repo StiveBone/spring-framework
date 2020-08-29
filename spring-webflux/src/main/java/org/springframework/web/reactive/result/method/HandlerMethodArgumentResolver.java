@@ -23,6 +23,8 @@ import org.springframework.web.reactive.BindingContext;
 import org.springframework.web.server.ServerWebExchange;
 
 /**
+ * handler方法参数解析器
+ *
  * Strategy to resolve the argument value for a method parameter in the context
  * of the current HTTP request.
  *

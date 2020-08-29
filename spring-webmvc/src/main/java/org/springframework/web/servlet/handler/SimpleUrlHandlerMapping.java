@@ -26,6 +26,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.util.CollectionUtils;
 
 /**
+ * 默认 handlerMapping
+ *
  * Implementation of the {@link org.springframework.web.servlet.HandlerMapping}
  * interface that maps from URLs to request handler beans. Supports both mapping to bean
  * instances and mapping to bean names; the latter is required for non-singleton handlers.

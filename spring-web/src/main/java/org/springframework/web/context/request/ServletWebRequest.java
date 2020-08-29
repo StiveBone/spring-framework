@@ -41,6 +41,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.util.WebUtils;
 
 /**
+ * 包装HttpServletRequest到WebRequest
+ *
  * {@link WebRequest} adapter for an {@link javax.servlet.http.HttpServletRequest}.
  *
  * @author Juergen Hoeller

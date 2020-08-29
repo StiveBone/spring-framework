@@ -36,6 +36,10 @@ public interface ConfigurationCondition extends Condition {
 
 
 	/**
+	 * 计算条件的阶段 
+	 * 1、解析配置类阶段
+	 * 2、解析Bean是不是生效
+	 * 
 	 * The various configuration phases where the condition could be evaluated.
 	 */
 	enum ConfigurationPhase {
