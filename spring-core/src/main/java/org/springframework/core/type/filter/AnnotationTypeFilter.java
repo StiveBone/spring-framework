@@ -26,6 +26,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
 /**
+ * 注解类型过滤器
+ * 
  * A simple {@link TypeFilter} which matches classes with a given annotation,
  * checking inherited annotations as well.
  *
@@ -94,6 +96,12 @@ public class AnnotationTypeFilter extends AbstractTypeHierarchyTraversingFilter 
 		return this.annotationType;
 	}
 
+	/**
+	 * 当前类被annotationType注解注解或者annotationType 当前类上的注解的元注解
+	 *
+	 * @param metadataReader 元信息读取
+	 * @return true
+	 */
 	@Override
 	protected boolean matchSelf(MetadataReader metadataReader) {
 		AnnotationMetadata metadata = metadataReader.getAnnotationMetadata();

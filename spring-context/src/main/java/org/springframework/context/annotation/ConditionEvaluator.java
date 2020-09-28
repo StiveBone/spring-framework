@@ -39,6 +39,8 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.MultiValueMap;
 
 /**
+ * 条件评估
+ *
  * @Conditional  计算
  * 1、Bean是否加载
  * 2、ConfigurationClass是否加载
