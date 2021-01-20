@@ -22,6 +22,7 @@ import org.springframework.core.AttributeAccessor;
 import org.springframework.lang.Nullable;
 
 /**
+ * Bean的元信息
  * BeanDefinition
  * {@link org.springframework.beans.factory.support.BeanDefinitionBuilder} {@link org.springframework.beans.factory.support.AbstractBeanDefinition}
  *

@@ -928,7 +928,9 @@ public class DispatcherServlet extends FrameworkServlet {
 		// Keep a snapshot of the request attributes in case of an include,
 		// to be able to restore the original attributes after the include.
 		Map<String, Object> attributesSnapshot = null;
+		//是否包含include
 		if (WebUtils.isIncludeRequest(request)) {
+			//创建当前请求的快照
 			attributesSnapshot = new HashMap<>();
 			Enumeration<?> attrNames = request.getAttributeNames();
 			while (attrNames.hasMoreElements()) {
@@ -939,12 +941,18 @@ public class DispatcherServlet extends FrameworkServlet {
 			}
 		}
 
+		//对request进行一些属性设置
 		// Make framework objects available to handlers and view objects.
+		//当前IOC容器
 		request.setAttribute(WEB_APPLICATION_CONTEXT_ATTRIBUTE, getWebApplicationContext());
+		//本地化解析器
 		request.setAttribute(LOCALE_RESOLVER_ATTRIBUTE, this.localeResolver);
+		//主题解析器
 		request.setAttribute(THEME_RESOLVER_ATTRIBUTE, this.themeResolver);
+		//
 		request.setAttribute(THEME_SOURCE_ATTRIBUTE, getThemeSource());
 
+		//flashMapManager redirect相关，进行上下2次请求数据的转发
 		if (this.flashMapManager != null) {
 			FlashMap inputFlashMap = this.flashMapManager.retrieveAndUpdate(request, response);
 			if (inputFlashMap != null) {
@@ -955,6 +963,7 @@ public class DispatcherServlet extends FrameworkServlet {
 		}
 
 		try {
+			//请求处理
 			doDispatch(request, response);
 		}
 		finally {
@@ -1019,13 +1028,17 @@ public class DispatcherServlet extends FrameworkServlet {
 		WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);
 
 		try {
+			//处理结果
 			ModelAndView mv = null;
+			//异常
 			Exception dispatchException = null;
 
 			try {
+				//文件上传解析
 				processedRequest = checkMultipart(request);
 				multipartRequestParsed = (processedRequest != request);
 
+				//1、根据请求找到handler，即请求的处理器
 				// Determine handler for the current request.
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null) {
@@ -1038,7 +1051,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				}
 
 				/**
-				 * 获取Handler
+				 * 根据handler找到 handler的adapter
 				 */
 				// Determine handler adapter for the current request.
 				HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
@@ -1057,6 +1070,7 @@ public class DispatcherServlet extends FrameworkServlet {
 					return;
 				}
 
+				//调用handler
 				// Actually invoke the handler.
 				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
 
@@ -1075,6 +1089,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				// making them available for @ExceptionHandler methods and other scenarios.
 				dispatchException = new NestedServletException("Handler dispatch failed", err);
 			}
+			//结果处理
 			processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);
 		}
 		catch (Exception ex) {
@@ -1122,6 +1137,7 @@ public class DispatcherServlet extends FrameworkServlet {
 
 		boolean errorView = false;
 
+		// 如果请求过程存在异常则进行异常处理
 		if (exception != null) {
 			if (exception instanceof ModelAndViewDefiningException) {
 				logger.debug("ModelAndViewDefiningException encountered", exception);
@@ -1134,6 +1150,7 @@ public class DispatcherServlet extends FrameworkServlet {
 			}
 		}
 
+		//视图渲染
 		// Did the handler return a view to render?
 		if (mv != null && !mv.wasCleared()) {
 			render(mv, request, response);
@@ -1147,11 +1164,13 @@ public class DispatcherServlet extends FrameworkServlet {
 			}
 		}
 
+		//如果启动了异步处理则返回
 		if (WebAsyncUtils.getAsyncManager(request).isConcurrentHandlingStarted()) {
 			// Concurrent handling started during a forward
 			return;
 		}
 
+		//触发interceptor的afterComplete方法
 		if (mappedHandler != null) {
 			mappedHandler.triggerAfterCompletion(request, response, null);
 		}

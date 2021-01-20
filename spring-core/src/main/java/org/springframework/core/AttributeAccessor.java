@@ -19,6 +19,8 @@ package org.springframework.core;
 import org.springframework.lang.Nullable;
 
 /**
+ * 属性上下文信息，BeanDefinition实现接口并不是为了存储Bean的元素信息 而是为了存放Bean的零时信息
+ *
  * Interface defining a generic contract for attaching and accessing metadata
  * to/from arbitrary objects.
  *

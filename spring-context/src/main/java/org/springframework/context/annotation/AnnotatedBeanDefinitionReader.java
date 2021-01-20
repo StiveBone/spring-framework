@@ -57,7 +57,7 @@ public class AnnotatedBeanDefinitionReader {
 	/**
 	 * Bean名称生成器
 	 */
-	private BeanNameGenerator beanNameGenerator = AnnotationBeanNameGenerator.INSTANCE;
+	private BeanNameGenerator beanNameGenerator = AnnotationBeanNameGenerator.INSTANCE; 
 
 	/**
 	 * 解析BeanDefinition的Scop
