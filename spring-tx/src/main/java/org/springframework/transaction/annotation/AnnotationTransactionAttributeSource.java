@@ -54,7 +54,7 @@ import org.springframework.util.ClassUtils;
  */
 @SuppressWarnings("serial")
 /**
- * 事务注解解析
+ * 事务注解解析，主要用于pointcut拦截点解析方式是否需要拦截
  */
 public class AnnotationTransactionAttributeSource extends AbstractFallbackTransactionAttributeSource
 		implements Serializable {

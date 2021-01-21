@@ -21,6 +21,9 @@ import java.lang.reflect.Method;
 import org.springframework.lang.Nullable;
 
 /**
+ * 事务属性来源策略接口，事务切点{@link TransactionAttributeSourcePointcut} 依赖属性来源，判断是否需要拦截时，
+ * 通过{@link getTransactionAttribute}方法检查该方式是否有事务属性如果有
+ *
  * Strategy interface used by {@link TransactionInterceptor} for metadata retrieval.
  *
  * <p>Implementations know how to source transaction attributes, whether from configuration,
