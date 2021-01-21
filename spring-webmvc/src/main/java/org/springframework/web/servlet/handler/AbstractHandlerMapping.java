@@ -89,10 +89,13 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	private PathMatcher pathMatcher = new AntPathMatcher();
 
 	/**
-	 * 拦截器
+	 * 中转拦截器list
 	 */
 	private final List<Object> interceptors = new ArrayList<>();
 
+	/**
+	 * 最终拦截器list
+	 */
 	private final List<HandlerInterceptor> adaptedInterceptors = new ArrayList<>();
 
 	/**
@@ -297,6 +300,8 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 
 
 	/**
+	 * 初始化拦截器
+	 *
 	 * Initializes the interceptors.
 	 * @see #extendInterceptors(java.util.List)
 	 * @see #initInterceptors()
@@ -321,6 +326,8 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	}
 
 	/**
+	 * 探测拦截器
+	 *
 	 * Detect beans of type {@link MappedInterceptor} and add them to the list of mapped interceptors.
 	 * <p>This is called in addition to any {@link MappedInterceptor MappedInterceptors} that may have been provided
 	 * via {@link #setInterceptors}, by default adding all beans of type {@link MappedInterceptor}
@@ -416,7 +423,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	public final HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
 
 		/**
-		 * handler
+		 * 通过子类获取Handler
 		 */
 		Object handler = getHandlerInternal(request);
 		if (handler == null) {
@@ -425,6 +432,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 		if (handler == null) {
 			return null;
 		}
+		//string名称的handler
 		// Bean name or resolved handler?
 		if (handler instanceof String) {
 			String handlerName = (String) handler;
@@ -432,7 +440,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 		}
 
 		/**
-		 * 设置Chain
+		 * 获取到executionChain包含了拦截器
 		 */
 		HandlerExecutionChain executionChain = getHandlerExecutionChain(handler, request);
 
@@ -473,6 +481,8 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	protected abstract Object getHandlerInternal(HttpServletRequest request) throws Exception;
 
 	/**
+	 * 拼装HandlerChain
+	 *
 	 * Build a {@link HandlerExecutionChain} for the given handler, including
 	 * applicable interceptors.
 	 * <p>The default implementation builds a standard {@link HandlerExecutionChain}

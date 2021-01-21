@@ -43,6 +43,9 @@ public class TransactionAttributeSourceAdvisor extends AbstractPointcutAdvisor {
 	@Nullable
 	private TransactionInterceptor transactionInterceptor;
 
+	/**
+	 * 切点
+	 */
 	private final TransactionAttributeSourcePointcut pointcut = new TransactionAttributeSourcePointcut() {
 		@Override
 		@Nullable

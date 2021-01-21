@@ -19,6 +19,8 @@ package org.springframework.cache.interceptor;
 import java.util.Set;
 
 /**
+ * 缓存操作
+ *
  * The base interface that all cache operations must implement.
  *
  * @author Stephane Nicoll

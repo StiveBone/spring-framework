@@ -217,12 +217,16 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	@Override
 	@Nullable
 	protected RequestMappingInfo getMappingForMethod(Method method, Class<?> handlerType) {
+		//方法上的@RequestMapping元信息
 		RequestMappingInfo info = createRequestMappingInfo(method);
 		if (info != null) {
+			//类上的@RequestMapping元信息
 			RequestMappingInfo typeInfo = createRequestMappingInfo(handlerType);
 			if (typeInfo != null) {
+				//合并方法和controller上的条件
 				info = typeInfo.combine(info);
 			}
+			//前缀
 			String prefix = getPathPrefix(handlerType);
 			if (prefix != null) {
 				info = RequestMappingInfo.paths(prefix).build().combine(info);
@@ -257,6 +261,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 		RequestMapping requestMapping = AnnotatedElementUtils.findMergedAnnotation(element, RequestMapping.class);
 		RequestCondition<?> condition = (element instanceof Class ?
 				getCustomTypeCondition((Class<?>) element) : getCustomMethodCondition((Method) element));
+		//根据注解信息生成RequestMappingInfo
 		return (requestMapping != null ? createRequestMappingInfo(requestMapping, condition) : null);
 	}
 
@@ -338,6 +343,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	public RequestMatchResult match(HttpServletRequest request, String pattern) {
 		RequestMappingInfo info = RequestMappingInfo.paths(pattern).options(this.config).build();
 		RequestMappingInfo matchingInfo = info.getMatchingCondition(request);
+		//拜大神
 		if (matchingInfo == null) {
 			return null;
 		}

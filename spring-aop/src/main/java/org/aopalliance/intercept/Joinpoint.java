@@ -19,6 +19,9 @@ package org.aopalliance.intercept;
 import java.lang.reflect.AccessibleObject;
 
 /**
+ *
+ * 切点
+ *
  * This interface represents a generic runtime joinpoint (in the AOP
  * terminology).
  *

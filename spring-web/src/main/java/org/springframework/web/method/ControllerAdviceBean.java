@@ -32,7 +32,7 @@ import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 /**
- * 在容器中查找 被 ControllerAdvice注解的类
+ * 包装一个Controller Advice 方便解析器@ControllerAdvice  属性以判断那些controller需要增强
  *
  * Encapsulates information about an {@link ControllerAdvice @ControllerAdvice}
  * Spring-managed bean without necessarily requiring it to be instantiated.
@@ -148,6 +148,8 @@ public class ControllerAdviceBean implements Ordered {
 	}
 
 	/**
+	 * 判断是否需要advised
+	 *
 	 * Check whether the given bean type should be advised by this
 	 * {@code ControllerAdviceBean}.
 	 * @param beanType the type of the bean to check

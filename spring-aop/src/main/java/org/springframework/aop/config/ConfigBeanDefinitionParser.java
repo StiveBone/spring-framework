@@ -50,6 +50,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.util.xml.DomUtils;
 
 /**
+ * xml aop切面配置 生成advisor
+ *
  * {@link BeanDefinitionParser} for the {@code <aop:config>} tag.
  *
  * @author Rob Harrop

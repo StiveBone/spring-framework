@@ -561,7 +561,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 		private final Map<T, MappingRegistration<T>> registry = new HashMap<>();
 
 		/**
-		 * 映射信息个HandlerMethod选系
+		 * RequestMappingInfo（@RequestMapping注解的元信息）和HandlerMethod
 		 * HandlerMethod：包装controller和method
 		 */
 		private final Map<T, HandlerMethod> mappingLookup = new LinkedHashMap<>();

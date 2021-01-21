@@ -27,6 +27,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * 事务切点
+ *
  * Inner class that implements a Pointcut that matches if the underlying
  * {@link TransactionAttributeSource} has an attribute for a given method.
  *

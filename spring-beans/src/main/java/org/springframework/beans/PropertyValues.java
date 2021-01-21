@@ -26,6 +26,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.lang.Nullable;
 
 /**
+ * Bean属性元信息
+ *
  * Holder containing one or more {@link PropertyValue} objects,
  * typically comprising one update for a specific target bean.
  *
