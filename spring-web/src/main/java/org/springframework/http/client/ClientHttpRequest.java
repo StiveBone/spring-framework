@@ -23,6 +23,8 @@ import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpRequest;
 
 /**
+ * 客户端的一个请求
+ *
  * Represents a client-side HTTP request.
  * Created via an implementation of the {@link ClientHttpRequestFactory}.
  *

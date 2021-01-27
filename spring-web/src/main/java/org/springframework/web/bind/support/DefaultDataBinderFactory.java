@@ -21,6 +21,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.context.request.NativeWebRequest;
 
 /**
+ * Data Binder工厂
+ *
  * Create a {@link WebRequestDataBinder} instance and initialize it with a
  * {@link WebBindingInitializer}.
  *
@@ -53,10 +55,16 @@ public class DefaultDataBinderFactory implements WebDataBinderFactory {
 	public final WebDataBinder createBinder(
 			NativeWebRequest webRequest, @Nullable Object target, String objectName) throws Exception {
 
+		/**
+		 * 设置messageConvert等参数
+		 */
 		WebDataBinder dataBinder = createBinderInstance(target, objectName, webRequest);
 		if (this.initializer != null) {
 			this.initializer.initBinder(dataBinder, webRequest);
 		}
+		/**
+		 * 调用@InitBinder方法
+		 */
 		initBinder(dataBinder, webRequest);
 		return dataBinder;
 	}

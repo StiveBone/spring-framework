@@ -159,6 +159,9 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 	//消息转换
 	private List<HttpMessageConverter<?>> messageConverters;
 
+	/**
+	 * requestResponseBodyAdvice
+	 */
 	private List<Object> requestResponseBodyAdvice = new ArrayList<>();
 
 	@Nullable

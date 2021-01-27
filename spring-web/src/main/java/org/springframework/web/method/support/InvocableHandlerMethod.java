@@ -33,6 +33,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.HandlerMethod;
 
 /**
+ * 可执行的handler method 添加 方法参数的机器器和数据绑定
+ *
  * Extension of {@link HandlerMethod} that invokes the underlying method with
  * argument values resolved from the current HTTP request through a list of
  * {@link HandlerMethodArgumentResolver}.
@@ -47,7 +49,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 
 
 	/**
-	 * 数据绑定
+	 * DataBinder工厂
 	 */
 	@Nullable
 	private WebDataBinderFactory dataBinderFactory;
@@ -145,6 +147,8 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	}
 
 	/**
+	 * 设置DataBind
+	 *
 	 * Get the method argument values for the current request, checking the provided
 	 * argument values and falling back to the configured argument resolvers.
 	 * <p>The resulting array will be passed into {@link #doInvoke}.
@@ -186,6 +190,8 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	}
 
 	/**
+	 * 调用InitBinder方法 对DataInitBinder做初始化
+	 *
 	 * Invoke the handler method with the given argument values.
 	 */
 	@Nullable

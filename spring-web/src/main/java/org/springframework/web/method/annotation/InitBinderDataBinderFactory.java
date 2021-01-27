@@ -31,6 +31,8 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.method.support.InvocableHandlerMethod;
 
 /**
+ *
+ *
  * Adds initialization to a WebDataBinder via {@code @InitBinder} methods.
  *
  * @author Rossen Stoyanchev
@@ -55,6 +57,8 @@ public class InitBinderDataBinderFactory extends DefaultDataBinderFactory {
 
 
 	/**
+	 * 调用@InitBinder方法初始化WebDataBinder
+	 *
 	 * Initialize a WebDataBinder with {@code @InitBinder} methods.
 	 * <p>If the {@code @InitBinder} annotation specifies attributes names,
 	 * it is invoked only if the names include the target object name.

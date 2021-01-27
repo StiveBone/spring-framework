@@ -205,6 +205,8 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	}
 
 	/**
+	 * 初始化handler method
+	 * <p>
 	 * Scan beans in the ApplicationContext, detect and register handler methods.
 	 *
 	 * @see #getCandidateBeanNames()
@@ -312,12 +314,15 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	}
 
 	/**
+	 * 注册handler的请求映射关系
+	 * <p>
+	 * <p>
 	 * Register a handler method and its unique mapping. Invoked at startup for
 	 * each detected handler method.
 	 *
-	 * @param handler the bean name of the handler or the handler instance controller类
-	 * @param method  the method to register 处理方法啊
-	 * @param mapping the mapping conditions associated with the handler method mappingInfo
+	 * @param handler the bean name of the handler or the handler instance                      请求处理器通常是controller
+	 * @param method  the method to register                                                    handler处理方法
+	 * @param mapping the mapping conditions associated with the handler method mappingInfo     请求满足的条件，通过mapping来判断该请求是否可以使用该handler进行处理
 	 * @throws IllegalStateException if another method was already registered
 	 *                               under the same mapping
 	 */
@@ -326,6 +331,8 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 	}
 
 	/**
+	 * 创建HandlerMethod 对handlerMethod进行包装，便于方法自省
+	 *
 	 * Create the HandlerMethod instance.
 	 *
 	 * @param handler either a bean name or an actual handler instance
@@ -463,7 +470,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 
 	/**
 	 * 没有handler
-	 *
+	 * <p>
 	 * Invoked when no matching mapping is not found.
 	 *
 	 * @param mappings   all registered mappings
@@ -648,6 +655,9 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 					addMappingName(name, handlerMethod);
 				}
 
+				/**
+				 * 处理跨域配置
+				 */
 				CorsConfiguration corsConfig = initCorsConfiguration(handler, method, mapping);
 				if (corsConfig != null) {
 					this.corsLookup.put(handlerMethod, corsConfig);

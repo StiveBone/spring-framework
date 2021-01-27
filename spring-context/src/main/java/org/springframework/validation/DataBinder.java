@@ -121,14 +121,26 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	 */
 	protected static final Log logger = LogFactory.getLog(DataBinder.class);
 
+	/**
+	 * 关联目标
+	 */
 	@Nullable
 	private final Object target;
 
+	/**
+	 * 目标beanName
+	 */
 	private final String objectName;
 
+	/**
+	 * 属性绑定结果
+	 */
 	@Nullable
 	private AbstractPropertyBindingResult bindingResult;
 
+	/**
+	 * 类型转换器
+	 */
 	@Nullable
 	private SimpleTypeConverter typeConverter;
 
@@ -149,14 +161,23 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 	@Nullable
 	private String[] requiredFields;
 
+	/**
+	 * 类型转换服务 代理PropertyEditor
+	 */
 	@Nullable
 	private ConversionService conversionService;
 
+	/**
+	 * 错误文案code处理器
+	 */
 	@Nullable
 	private MessageCodesResolver messageCodesResolver;
 
 	private BindingErrorProcessor bindingErrorProcessor = new DefaultBindingErrorProcessor();
 
+	/**
+	 * 关联bean的Validator集合
+	 */
 	private final List<Validator> validators = new ArrayList<>();
 
 
@@ -711,6 +732,7 @@ public class DataBinder implements PropertyEditorRegistry, TypeConverter {
 
 
 	/**
+	 * 绑定方法
 	 * Bind the given property values to this binder's target.
 	 * <p>This call can create field errors, representing basic binding
 	 * errors like a required field (code "required"), or type mismatch

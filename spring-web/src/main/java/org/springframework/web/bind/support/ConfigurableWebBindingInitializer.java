@@ -25,7 +25,7 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 
 /**
- * 初始数据绑定
+ * 初始化DataBinder 设置转换服务，消息转换器，校验器
  *
  * Convenient {@link WebBindingInitializer} for declarative configuration
  * in a Spring application context. Allows for reusing pre-configured
@@ -46,18 +46,33 @@ public class ConfigurableWebBindingInitializer implements WebBindingInitializer 
 
 	private boolean directFieldAccess = false;
 
+	/**
+	 * 国际化 code message转换
+	 */
 	@Nullable
 	private MessageCodesResolver messageCodesResolver;
 
+	/**
+	 * 绑定异常处理器
+	 */
 	@Nullable
 	private BindingErrorProcessor bindingErrorProcessor;
 
+	/**
+	 * 参数校验
+	 */
 	@Nullable
 	private Validator validator;
 
+	/**
+	 * 转换服务
+	 */
 	@Nullable
 	private ConversionService conversionService;
 
+	/**
+	 * 属性编辑器注册
+	 */
 	@Nullable
 	private PropertyEditorRegistrar[] propertyEditorRegistrars;
 

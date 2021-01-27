@@ -68,6 +68,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.util.xml.DomUtils;
 
 /**
+ * Xml BeanDefinition解析
+ *
  * Stateful delegate class used to parse XML bean definitions.
  * Intended for use by both the main parser and any extension
  * {@link BeanDefinitionParser BeanDefinitionParsers} or
@@ -406,6 +408,8 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	/**
+	 * 解析Xml BeanDefinition
+	 *
 	 * Parses the supplied {@code <bean>} element. May return {@code null}
 	 * if there were errors during parse. Errors are reported to the
 	 * {@link org.springframework.beans.factory.parsing.ProblemReporter}.
@@ -493,6 +497,8 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	/**
+	 * 解析元素信息到成BeanDefinition
+	 *
 	 * Parse the bean definition itself, without regard to name or aliases. May return
 	 * {@code null} if problems occurred during the parsing of the bean definition.
 	 */
@@ -514,15 +520,30 @@ public class BeanDefinitionParserDelegate {
 		try {
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
 
+			/**
+			 * 解析Attribute
+			 */
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
 
+			/**
+			 * 解析meta信息
+			 */
 			parseMetaElements(ele, bd);
 			parseLookupOverrideSubElements(ele, bd.getMethodOverrides());
 			parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
 
+			/**
+			 * 解析构造器
+			 */
 			parseConstructorArgElements(ele, bd);
+			/**
+			 * 解析配置信息 便于使用BeanWrapper修改bean的属性
+			 */
 			parsePropertyElements(ele, bd);
+			/**
+			 * 解析Qualifier
+			 */
 			parseQualifierElements(ele, bd);
 
 			bd.setResource(this.readerContext.getResource());
@@ -547,6 +568,8 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	/**
+	 * 根据xml配置BeanDefinition属性
+	 *
 	 * Apply the attributes of the given bean element to the given bean * definition.
 	 * @param ele bean declaration element
 	 * @param beanName bean name

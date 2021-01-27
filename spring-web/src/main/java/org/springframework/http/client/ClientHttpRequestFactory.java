@@ -22,6 +22,8 @@ import java.net.URI;
 import org.springframework.http.HttpMethod;
 
 /**
+ * 请求创建工厂
+ *
  * Factory for {@link ClientHttpRequest} objects.
  * Requests are created by the {@link #createRequest(URI, HttpMethod)} method.
  *
