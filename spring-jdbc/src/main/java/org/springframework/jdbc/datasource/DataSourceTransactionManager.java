@@ -242,6 +242,12 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 		return txObject;
 	}
 
+	/**
+	 * 判断是否已经存在一个事务
+	 *
+	 * @param transaction transaction object returned by doGetTransaction
+	 * @return true or false
+	 */
 	@Override
 	protected boolean isExistingTransaction(Object transaction) {
 		DataSourceTransactionObject txObject = (DataSourceTransactionObject) transaction;
@@ -249,6 +255,8 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 	}
 
 	/**
+	 * 准备连接
+	 *
 	 * This implementation sets the isolation level but ignores the timeout.
 	 */
 	@Override
@@ -272,6 +280,9 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 			Integer previousIsolationLevel = DataSourceUtils.prepareConnectionForTransaction(con, definition);
 			txObject.setPreviousIsolationLevel(previousIsolationLevel);
 
+			/**
+			 * 设置为手动提交
+			 */
 			// Switch to manual commit if necessary. This is very expensive in some JDBC drivers,
 			// so we don't want to do it unnecessarily (for example if we've explicitly
 			// configured the connection pool to set it already).
@@ -291,6 +302,9 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 				txObject.getConnectionHolder().setTimeoutInSeconds(timeout);
 			}
 
+			/**
+			 * 将连接绑定到当前线程
+			 */
 			// Bind the connection holder to the thread.
 			if (txObject.isNewConnectionHolder()) {
 				TransactionSynchronizationManager.bindResource(obtainDataSource(), txObject.getConnectionHolder());
@@ -306,6 +320,12 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 		}
 	}
 
+	/**
+	 * 连接和线程接触绑定
+	 *
+	 * @param transaction transaction object returned by {@code doGetTransaction}
+	 * @return
+	 */
 	@Override
 	protected Object doSuspend(Object transaction) {
 		DataSourceTransactionObject txObject = (DataSourceTransactionObject) transaction;

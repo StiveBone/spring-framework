@@ -28,6 +28,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
+ * Spring IOC Advisor是实现
+ * {@link org.springframework.aop.aspectj.AspectJPointcutAdvisor}  通过AspectJ注解实现
+ * {@link org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor} 通过xml使用ApsectK实现
+ * {@link DefaultBeanFactoryPointcutAdvisor}
+ * {@link StaticMethodMatcherPointcutAdvisor}
+ *
  * Abstract BeanFactory-based PointcutAdvisor that allows for any Advice
  * to be configured as reference to an Advice bean in a BeanFactory.
  *

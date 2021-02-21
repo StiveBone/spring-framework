@@ -28,7 +28,11 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 
 /**
- * 代理BeanProcessor的基础类
+ * 利用BeanPostProcessor生成AOP代理的支持类。
+ * AOP的增强方式：
+ * 1、通过BeanPostProcessor在Bean初始化完成之后对Bean进行增强
+ * 2、通过ProxyCreatorSupport给指定的类生成AOP代理对象
+ * 3、通过向容器注册Advisor实现本质是1
  *
  *
  * Base class with common functionality for proxy processors, in particular

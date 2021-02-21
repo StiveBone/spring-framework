@@ -22,6 +22,8 @@ import java.util.List;
 import org.springframework.util.Assert;
 
 /**
+ * 使用切面生成AOP代理实例的方便类
+ *
  * Base class for proxy factories.
  * Provides convenient access to a configurable AopProxyFactory.
  *

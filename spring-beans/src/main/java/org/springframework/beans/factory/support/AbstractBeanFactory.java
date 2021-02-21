@@ -391,7 +391,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				/**
 				 * 原型对象创建
 				 */
-				else if (mbd.isPrototype()) {x
+				else if (mbd.isPrototype()) {
 					// It's a prototype -> create a new instance.
 					Object prototypeInstance = null;
 					try {
