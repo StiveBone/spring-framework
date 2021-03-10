@@ -1078,6 +1078,15 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 		return new ServletRequestDataBinderFactory(binderMethods, getWebBindingInitializer());
 	}
 
+	/**
+	 * 获取modelAndView
+	 *
+	 * @param mavContainer
+	 * @param modelFactory
+	 * @param webRequest
+	 * @return
+	 * @throws Exception
+	 */
 	@Nullable
 	private ModelAndView getModelAndView(ModelAndViewContainer mavContainer,
 			ModelFactory modelFactory, NativeWebRequest webRequest) throws Exception {
